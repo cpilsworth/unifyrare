@@ -9,3 +9,10 @@ helix-importer-ui
 .idea
 .wrangler
 .claude
+
+# Migration working files
+migration-work/
+catalog/
+tools/importer/reports/
+tools/importer/*.bundle.js
+tools/importer/urls-*.txt

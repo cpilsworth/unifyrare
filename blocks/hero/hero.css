@@ -1,12 +1,16 @@
 .hero {
-  --gradient-start: rgb(var(--color-dark-base) / 80%);
-  --gradient-end: rgb(var(--color-dark-base) / 20%);
-  --default-min-height: 360px;
+  --gradient-start: rgb(var(--color-dark-base) / 70%);
+  --gradient-end: rgb(var(--color-dark-base) / 30%);
+  --default-min-height: 280px;
   --min-height: var(--default-min-height);
 
   position: relative;
   color: #fff;
   overflow: hidden;
+
+  h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+  }
 
   &.small {
     --min-height: 180px;
@@ -160,9 +164,9 @@
       display: grid;
       grid-template-columns: 45% 45%;
       justify-content: space-between;
-      max-width: var(--grid-container-width);
-      margin: 0 auto;
-      background: unset;
+      max-width: unset;
+      margin: 0;
+      background: linear-gradient(90deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
 
       .fg-text {
         width: unset;

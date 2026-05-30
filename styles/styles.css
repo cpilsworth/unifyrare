@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 @font-face {
   font-family: Montserrat;
   font-style: normal;
@@ -69,7 +71,7 @@
   --spacing-xs: 4px;
 
   /* color schemes */
-  color-scheme: light dark;
+  color-scheme: light;
 
   /* color tokens */
   --color-gray-100: #f1f1f1;
@@ -156,27 +158,27 @@
 
   /* named colors */
   --color-light-base: 255 255 255;
-  --color-dark-base: 0 0 0;
-  --color-light: rgb(255 255 255);
-  --color-dark: rgb(0 0 0);
-  --color-text: light-dark(var(--color-dark), var(--color-light));
-  --color-link: light-dark(var(--color-gray-900), var(--color-gray-100));
-  --color-brand: var(--color-purple-500);
-  --color-accent: light-dark(var(--color-magenta-600), var(--color-magenta-500));
-  --color-background: light-dark(var(--color-light), var(--color-dark));
-  --color-shaded: light-dark(#f9f9f9, #111);
+  --color-dark-base: 0 47 108;
+  --color-light: #fff;
+  --color-dark: #002f6c;
+  --color-text: var(--text-color);
+  --color-link: var(--link-color);
+  --color-brand: var(--heading-color);
+  --color-accent: var(--link-color);
+  --color-background: var(--background-color);
+  --color-shaded: var(--section-light-bg);
 
   /* fonts */
-  --font-family: montserrat, "Trebuchet MS", sans-serif;
+  --font-family: var(--body-font-family);
 
   /* headings */
-  --heading-font-size-xxl: 32.44px;
-  --heading-font-size-xl: 28.83px;
-  --heading-font-size-l: 25.63px;
-  --heading-font-size-m: 22.78px;
-  --heading-font-size-s: 20.25px;
-  --heading-font-size-xs: 18px;
-  --heading-line-height: 1.15;
+  --heading-font-size-xxl: var(--heading-size-xxl);
+  --heading-font-size-xl: var(--heading-size-xl);
+  --heading-font-size-l: var(--heading-size-l);
+  --heading-font-size-m: var(--heading-size-m);
+  --heading-font-size-s: var(--heading-size-s);
+  --heading-font-size-xs: var(--heading-size-xs);
+  --heading-line-height: 1.25;
 
   /* body */
   --body-font-size-xxxl: 25px;
@@ -209,15 +211,10 @@ body {
   margin: 0;
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: var(--font-family);
   font-size: var(--body-font-size-m);
   line-height: var(--body-line-height);
   padding: var(--header-height) 0 0;
-
-  &.session {
-    /* only allow font loading if a session */
-    font-family: var(--font-family);
-  }
 
   &.has-breadcrumb {
     margin: calc(var(--header-height) + var(--breadcrumb-height)) 0 0;
@@ -238,6 +235,12 @@ header {
 
 a {
   color: var(--color-link);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--link-hover-color);
+    text-decoration: underline;
+  }
 
   &.btn {
     display: inline-block;
@@ -295,13 +298,52 @@ a {
   }
 }
 
+/* EDS button reset */
+main .button-container { display: inline; }
+
+main a.button:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--link-color);
+  font-size: inherit;
+  font-weight: inherit;
+  padding: 0;
+  margin: 0;
+  text-decoration: underline;
+  white-space: normal;
+}
+
 /* sections */
 .section {
   display: block;
+  padding: var(--section-padding);
 
   > .default-content {
     max-width: var(--grid-container-width);
     margin: 0 auto;
+  }
+
+  &.dark {
+    background-color: var(--section-dark-bg);
+    color: var(--section-dark-text);
+
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--section-dark-text);
+    }
+
+    a {
+      color: var(--section-dark-text);
+    }
+  }
+
+  &.light {
+    background-color: var(--section-light-bg);
+  }
+
+  &.highlight {
+    background-color: #f0f3f6;
+    padding: 24px;
   }
 }
 
@@ -323,7 +365,13 @@ button {
 }
 
 li {
-  margin-block: 1em;
+  margin-block: 0.5em;
+}
+
+ol li {
+  margin-block: 0.25em;
+  font-size: 14px;
+  line-height: 1.5;
 }
 
 h1,
@@ -332,8 +380,16 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 600;
+  font-family: var(--heading-font-family);
+  font-weight: 200;
   line-height: var(--heading-line-height);
+  color: var(--heading-color);
+}
+
+h4,
+h5,
+h6 {
+  font-weight: 500;
 }
 
 h1 { font-size: var(--heading-font-size-xxl); }
@@ -345,6 +401,11 @@ h6 { font-size: var(--heading-font-size-xs); }
 
 strong {
   font-weight: 600;
+}
+
+sup {
+  font-size: 12px;
+  vertical-align: top;
 }
 
 input,
