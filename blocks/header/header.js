@@ -12,7 +12,7 @@ function buildNavPanel(navSection) {
     const item = document.createElement('li');
     item.className = 'nav-item';
 
-    const link = li.querySelector(':scope > a');
+    const link = li.querySelector(':scope > a') || li.querySelector(':scope > p > a');
     if (link) {
       const a = document.createElement('a');
       a.href = link.getAttribute('href');

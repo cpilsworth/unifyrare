@@ -19,9 +19,20 @@ export default {
       'style',
       'noscript',
       'iframe',
+      'awt-form',
+      'form',
+      'awt-newsletter',
+      'awt-form-newsletter',
     ];
     selectors.forEach((sel) => {
       main.querySelectorAll(sel).forEach((el) => el.remove());
+    });
+
+    // Remove form-like containers (select dropdowns rendered as lists)
+    main.querySelectorAll('awt-container').forEach((container) => {
+      const hasInput = container.querySelector('input, select, textarea, [type="email"], [type="text"]');
+      const hasFormLabels = container.querySelectorAll('label, [class*="form"], [class*="field"]').length > 3;
+      if (hasInput || hasFormLabels) container.remove();
     });
 
     const content = main.querySelector('#content') || main;
@@ -204,10 +215,18 @@ export default {
       firstHr.parentNode.insertBefore(sectionMeta, firstHr);
     }
 
-    // 10. Clean up empty elements
+    // 10. Clean up empty elements and leftover modal text
     content.querySelectorAll('div:empty, span:empty').forEach((el) => {
       if (!el.querySelector('img, picture, table')) {
         el.remove();
+      }
+    });
+
+    // Remove "Exit Continue" text (HCP modal button remnants)
+    content.querySelectorAll('p').forEach((p) => {
+      const text = p.textContent?.trim();
+      if (text === 'Exit Continue' || text === 'Exit' || text === 'Continue') {
+        p.remove();
       }
     });
 
