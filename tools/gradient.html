@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Background Gradient Generator</title>
+    <meta name="description" content="Recreate a branded background as a pure CSS gradient using the Unify Rare palette." />
+    <!-- DA SDK: exposes the global DA_SDK promise ({ context, token, actions }) -->
+    <script src="https://da.live/nx/utils/sdk.js" type="module"></script>
+    <link rel="stylesheet" href="/tools/gradient/gradient.css" />
+    <script src="/tools/gradient/gradient.js" type="module"></script>
+  </head>
+  <body>
+    <main class="grad" hidden>
+      <header class="grad-header">
+        <h1>Background Gradient Generator</h1>
+        <p>Recreate a branded background as a pure CSS gradient using only the Unify Rare palette.</p>
+      </header>
+
+      <section class="grad-stage" aria-label="Preview">
+        <div class="compare" id="compare">
+          <!-- Bottom layer: the generated CSS gradient -->
+          <div class="compare-gradient" id="preview"></div>
+          <!-- Top layer: the reference image, clipped by the slider -->
+          <div class="compare-reference" id="ref-clip">
+            <img id="ref-img" alt="Reference background" />
+            <p class="compare-empty" id="ref-empty">Add a reference image URL below to compare →</p>
+          </div>
+          <div class="compare-handle" id="compare-handle" aria-hidden="true"></div>
+          <input
+            type="range" min="0" max="100" value="50" step="0.1"
+            class="compare-slider" id="compare-slider"
+            aria-label="Comparison slider: drag to reveal the CSS gradient" />
+          <span class="compare-tag compare-tag-ref">Reference</span>
+          <span class="compare-tag compare-tag-css">CSS</span>
+        </div>
+
+        <label class="grad-field grad-ref-field">
+          <span>Reference image URL</span>
+          <input type="url" id="ref-url" placeholder="https://unifyrare.com/.../background_form.jpg" />
+        </label>
+      </section>
+
+      <section class="grad-panel">
+        <div class="grad-presets">
+          <span class="grad-label">Presets</span>
+          <button type="button" data-preset="hero">Dark hero</button>
+          <button type="button" data-preset="form">Brighter form</button>
+        </div>
+
+        <div class="grad-swatches" aria-label="Brand palette">
+          <span class="grad-label">Brand palette</span>
+          <div class="grad-swatch-row" id="swatches"></div>
+        </div>
+
+        <div class="grad-controls" id="controls"></div>
+      </section>
+
+      <section class="grad-output">
+        <label class="grad-field">
+          <span>Generated CSS</span>
+          <textarea id="css-out" readonly rows="9" spellcheck="false"></textarea>
+        </label>
+        <div class="grad-actions">
+          <button type="button" id="copy-btn" class="primary">Copy CSS</button>
+          <button type="button" id="insert-btn" hidden>Insert into document</button>
+          <span class="grad-toast" id="toast" role="status" aria-live="polite"></span>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

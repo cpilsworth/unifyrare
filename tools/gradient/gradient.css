@@ -1,0 +1,328 @@
+:root {
+  --grad-fg: #1a1a1a;
+  --grad-muted: #676767;
+  --grad-border: #e1e1e1;
+  --grad-bg: #fff;
+  --grad-accent: #002f6c;
+  --grad-radius: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--grad-fg);
+  background: #fafafa;
+}
+
+.grad {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 20px 48px;
+  display: grid;
+  gap: 24px;
+}
+
+.grad-header h1 {
+  margin: 0 0 4px;
+  font-size: 22px;
+}
+
+.grad-header p {
+  margin: 0;
+  color: var(--grad-muted);
+  font-size: 14px;
+}
+
+.grad-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--grad-muted);
+  margin-bottom: 8px;
+}
+
+/* --- Comparison stage ------------------------------------------------------ */
+.grad-stage {
+  display: grid;
+  gap: 12px;
+}
+
+.compare {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  border-radius: var(--grad-radius);
+  overflow: hidden;
+  user-select: none;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 12%);
+}
+
+.compare-gradient,
+.compare-reference {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.compare-reference {
+  width: 50%;
+  overflow: hidden;
+  border-right: 2px solid rgb(255 255 255 / 80%);
+}
+
+.compare-reference img {
+  position: absolute;
+  inset: 0 auto 0 0;
+  height: 100%;
+  object-fit: cover;
+  display: none;
+}
+
+.compare.has-ref .compare-reference img {
+  display: block;
+}
+
+.compare.has-ref .compare-empty {
+  display: none;
+}
+
+.compare-empty {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+  font-size: 13px;
+  color: #fff;
+  background: rgb(0 0 0 / 25%);
+}
+
+.compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: rgb(255 255 255 / 80%);
+  pointer-events: none;
+}
+
+.compare-handle::after {
+  content: "↔";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--grad-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
+
+.compare-slider {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+
+.compare-tag {
+  position: absolute;
+  bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fff;
+  background: rgb(0 0 0 / 35%);
+  padding: 2px 8px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.compare-tag-ref { left: 8px; }
+.compare-tag-css { right: 8px; }
+
+/* --- Fields ---------------------------------------------------------------- */
+.grad-field {
+  display: grid;
+  gap: 6px;
+}
+
+.grad-field > span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.grad-field input,
+.grad-field textarea {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 8px 10px;
+  border: 1px solid var(--grad-border);
+  border-radius: 8px;
+  background: var(--grad-bg);
+}
+
+.grad-field textarea {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+/* --- Panel ----------------------------------------------------------------- */
+.grad-panel {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+  background: var(--grad-bg);
+  border: 1px solid var(--grad-border);
+  border-radius: var(--grad-radius);
+}
+
+.grad-presets {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.grad-presets .grad-label {
+  margin: 0 4px 0 0;
+}
+
+.grad-presets button {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 6px 14px;
+  border: 1px solid var(--grad-border);
+  border-radius: 999px;
+  background: #f4f4f4;
+  cursor: pointer;
+}
+
+.grad-presets button:hover {
+  border-color: var(--grad-accent);
+}
+
+.grad-swatch-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.grad-swatch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  padding: 4px 8px 4px 4px;
+  border: 1px solid var(--grad-border);
+  border-radius: 999px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.grad-swatch-chip {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 10%);
+}
+
+.grad-controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 24px;
+}
+
+.grad-slider {
+  display: grid;
+  gap: 6px;
+}
+
+.grad-slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.grad-slider-label output {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-weight: 400;
+  color: var(--grad-muted);
+}
+
+.grad-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--grad-accent);
+}
+
+/* --- Output ---------------------------------------------------------------- */
+.grad-output {
+  display: grid;
+  gap: 12px;
+}
+
+.grad-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.grad-actions button {
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--grad-border);
+  background: #f4f4f4;
+  cursor: pointer;
+}
+
+.grad-actions button.primary {
+  background: var(--grad-accent);
+  color: #fff;
+  border-color: var(--grad-accent);
+}
+
+.grad-toast {
+  font-size: 13px;
+  color: #00ab8e;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.grad-toast.show {
+  opacity: 1;
+}
+
+@media (width <= 600px) {
+  .grad-controls {
+    grid-template-columns: 1fr;
+  }
+}
