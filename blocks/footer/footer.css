@@ -13,34 +13,119 @@ footer {
       text-decoration: underline;
     }
   }
-}
 
-.footer-wrapper {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-}
-
-.footer-legal {
-  font-size: 14px;
-  line-height: 1.6;
-
-  img {
-    height: 40px;
-    width: auto;
-    margin-bottom: 24px;
+  .footer-content {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    font-size: 14px;
   }
 
-  p {
-    margin: 8px 0;
-    color: rgb(255 255 255 / 70%);
+  .section-nav {
+    margin-bottom: 40px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid rgb(255 255 255 / 20%);
+    opacity: 0.8;
+
+    h3,
+    h4 {
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin: 0 0 10px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      margin: 4px 0;
+      font-size: 13px;
+    }
+  }
+
+  .section-legal {
+    font-size: 14px;
+    line-height: 1.6;
+
+    img {
+      height: 40px;
+      width: auto;
+      margin-bottom: 24px;
+    }
+
+    p {
+      margin: 8px 0;
+      color: rgb(255 255 255 / 70%);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .section-copyright {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgb(255 255 255 / 20%);
+    font-size: 12px;
+    line-height: 1.5;
+    color: rgb(255 255 255 / 50%);
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .section {
+    .default-content {
+      max-width: initial;
+      margin: initial;
+    }
   }
 }
 
-.footer-disclaimer {
-  margin-top: 32px;
-  padding-top: 24px;
-  border-top: 1px solid rgb(255 255 255 / 20%);
-  font-size: 12px;
-  line-height: 1.5;
-  color: rgb(255 255 255 / 50%);
+@media (width >= 600px) {
+  footer .section-nav .columns .row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+}
+
+@media (width >= 900px) {
+  footer {
+    .section-legal {
+      display: flex;
+      justify-content: end;
+      gap: var(--spacing-xl);
+      margin-bottom: 24px;
+
+      ul {
+        display: flex;
+        justify-content: end;
+        gap: var(--spacing-xl);
+      }
+
+      li {
+        margin: 0;
+      }
+    }
+
+    .section-copyright {
+      display: flex;
+      justify-content: end;
+      gap: var(--spacing-xl);
+    }
+
+    .section-nav .columns .row {
+      grid-template-columns: repeat(8, 1fr);
+    }
+  }
 }

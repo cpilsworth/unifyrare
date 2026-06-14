@@ -116,6 +116,7 @@
 
     .hero-heading {
       margin: 0;
+      font-size: clamp(var(--heading-font-size-xxl), 5vw, 61px);
     }
   }
 

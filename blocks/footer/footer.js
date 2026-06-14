@@ -1,30 +1,32 @@
+import { getConfig, getMetadata } from '../../scripts/ak.js';
+import { loadFragment } from '../fragment/fragment.js';
+
+const FOOTER_PATH = '/footer';
+
+/**
+ * loads and decorates the footer
+ * @param {Element} el The footer element
+ */
 export default async function init(el) {
-  let resp = await fetch('/content/footer.plain.html');
-  if (!resp.ok) resp = await fetch('/footer.plain.html');
-  if (!resp.ok) return;
+  const { locale } = getConfig();
+  const footerMeta = getMetadata('footer');
+  const path = footerMeta || FOOTER_PATH;
+  try {
+    const fragment = await loadFragment(`${locale.prefix}${path}`);
+    fragment.classList.add('footer-content');
 
-  const html = await resp.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const sections = doc.querySelectorAll(':scope > body > div');
+    const sections = [...fragment.querySelectorAll('.section')];
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'footer-wrapper';
+    const copyright = sections.pop();
+    copyright.classList.add('section-copyright');
 
-  if (sections[0]) {
-    const legalSection = document.createElement('div');
-    legalSection.className = 'footer-legal';
-    legalSection.innerHTML = sections[0].innerHTML;
-    wrapper.append(legalSection);
+    const legal = sections.pop();
+    legal.classList.add('section-legal');
+
+    sections.forEach((s) => s.classList.add('section-nav'));
+
+    el.append(fragment);
+  } catch (e) {
+    throw Error(e);
   }
-
-  if (sections[1]) {
-    const disclaimer = document.createElement('div');
-    disclaimer.className = 'footer-disclaimer';
-    disclaimer.innerHTML = sections[1].innerHTML;
-    wrapper.append(disclaimer);
-  }
-
-  el.append(wrapper);
-  el.style.display = 'block';
 }
